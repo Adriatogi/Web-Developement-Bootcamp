@@ -1,7 +1,9 @@
 var total = 0;
 var current = 0;
+$("#result").slideUp();
 
 function restart() {
+  $("#result").slideUp();
   $("h2").text("Are you smart?");
   $("#choice1").text("Totally");
   $("#choice2").text("Kind of");
@@ -11,6 +13,7 @@ function restart() {
   current = 0;
   total = 0;
 }
+
 function restartButtons() {
   $("#choice1").text("Restart");
   $("#choice2").text("Restart");
@@ -134,6 +137,7 @@ function character(total) {
 
 function changeQuestion(){
   if(current ===0){
+    $("#result").slideUp();
     $("h2").text("Are you smart?");
     $("#choice1").text("Totally");
     $("#choice2").text("Kind of");
@@ -154,6 +158,7 @@ function changeQuestion(){
   else if(current ===3){
     character(total);
     restartButtons();
+    $("#result").slideDown();
   }
   else if(current ===4){  
     restart();
