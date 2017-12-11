@@ -1,11 +1,22 @@
-.jumbotron {
+body {
+    font-family: 'Chivo';
+}
+
+#title{
+    text-align: center;
+}
+
+#jumbo {
     background: white;
-    margin: 5% 10%;
+    margin: 3% 10%;
     position: relative;
+    padding: 3rem 2rem
 }
 
 #h2 {
-    font-family: 'Chivo';
+    padding-top: 5px;
+    font-size: 25px;
+    text-align: center;
 }
 
 .button {
@@ -44,12 +55,22 @@ img {
 }
 
 #quote {
-    font-style: italic;
     font-weight: 700;
-    font-size: large;
+    font-style: italic;
+    font-size: 25px;
     text-align: center;
 }
 
 #questionDisplay {
-    padding-top: 5%;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+#emphasize {
+    font-weight: 700;
+    font-size: 80px;
+}
+
+.smaller {
+    font-size: 30px;
 }

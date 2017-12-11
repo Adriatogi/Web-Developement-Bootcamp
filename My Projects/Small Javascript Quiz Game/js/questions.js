@@ -1,9 +1,9 @@
 var total = 0;
 var current = 0;
-$("#result").slideUp();
+$("#result").hide();
 
 function restart() {
-  $("#result").slideUp();
+  $("#result").slideUp("fast");
   $("h2").text("Are you smart?");
   $("#choice1").text("Totally");
   $("#choice2").text("Kind of");
@@ -167,7 +167,6 @@ function character(total) {
 
 function changeQuestion(){
   if(current ===0){
-    $("#result").slideUp();
     $("h2").text("Are you smart?");
     $("#choice1").text("Totally");
     $("#choice2").text("Kind of");
