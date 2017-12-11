@@ -78,12 +78,12 @@ function character(total) {
     case 212:
       $("h2").text("Your character is Alien Parasites");
       $('#picture').prepend('<img id="parasites" src=pictures/Parasites.png />') 
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend("&#8220;Like we say in Brooklyn...we're walkin' here!&#8221;— Cousin Nicky")
       break;
     case 312:
       $("h2").text("Your character is Hemorrhage");
       $('#picture').prepend('<img id="hemorrhage" src=pictures/Hemorrhage.png />') 
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;I can shave it&#8221;- Hemorrhage')
       break;
     case 122:
       $("h2").text("Your character is Snuffles");
@@ -108,57 +108,57 @@ function character(total) {
     case 232:
       $("h2").text("Your character is Krombopulos Michael");
       $('#picture').prepend('<img id="krom" src=pictures/Krom.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend("&#8220;I'm very discreet.I have no code of ethics.I will kill anyone, anywhere.Children, animals, old people, doesn't matter. I just love killing&#8221;- Krombopulos Michael")
       break;
     case 332:
       $("h2").text("Your character is Morty Smith Jr.");
       $('#picture').prepend('<img id="jr" src=pictures/Jr.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;I like to dance... on the graves of my enemies&#8221;- Morty Smith Jr.')
       break;
     case 113:
       $("h2").text("Your character is Squanchy");
       $('#picture').prepend('<img id="squanch" src=pictures/Squanch.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend("&#8220;Squanchin' party bro!&#8221;- Squanchy")
       break;
     case 213:
       $("h2").text("Your character is Mr. Meeseeks");
       $('#picture').prepend('<img id="meeseeks" src=pictures/meeseeks.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend("&#8220;I'm Mr.Meeseeks! Look at me!&#8221;- Mr. Meeseeks")
       break;
     case 313:
       $("h2").text("Your character is Noob-Noob");
       $('#picture').prepend('<img id="noob" src=pictures/Noob.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;Gawd Damn!&#8221;- Noob-Noob')
       break;
     case 123:
       $("h2").text("Your character is Dr. Xenon Bloom");
       $('#picture').prepend('<img id="doctor" src=pictures/Doctor.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;The digestive tract is the evacuation route. Get it?&#8221;- Dr. Xenon Bloom')
       break;
     case 223:
       $("h2").text("Your character is Doofus Rick");
       $('#picture').prepend('<img id="doofus" src=pictures/Doofus.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;Hey! I don’t eat poop! Y-you guys are always so mean to me!&#8221;- Doofus Rick')
       break;
     case 323:
       $("h2").text("Your character is Ants in my Eyes Johnson");
       $('#picture').prepend('<img id="johnson" src=pictures/Johnson.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend("&#8220;'m Ants in my Eyes Johnson, everything's black, I can't see a thing, and I also can't feel anything either!&#8221;- Ants in my Eyes Johnson")
       break;
     case 133:
       $("h2").text("Your character is Evil Morty");
       $('#picture').prepend('<img id="evil" src=pictures/Evil.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;This seems like a good time for a drink, and a cold calculated speech with sinister overtones. A speech about politics, about order, brotherhood, power. But speeches are for campaigning. Now is the time for action.&#8221;- Summer Smith')
       break;
     case 233:
       $("h2").text("Your character is Revolio Clockberg, Jr.");
       $('#picture').prepend('<img id="gear" src=pictures/Gear.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220Calling me Gearhead is like calling a Chinese person Asia face!&#8221;- Revolio Clockberg, Jr.')
       break;
     case 333:
       $("h2").text("Your character is Abradolf Lincler");
       $('#picture').prepend('<img id="abradolf" src=pictures/Abradolf.png />')  
-      $('#quote').prepend('&#8220;Boo-ya&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;Prepare to be emancipated from your own inferior genes!&#8221;- Abradolf Lincler')
       break;
   }
 }
