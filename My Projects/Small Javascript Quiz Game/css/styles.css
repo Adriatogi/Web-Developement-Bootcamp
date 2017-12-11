@@ -24,7 +24,7 @@
 } 
 
 .show {
-    height: 400px;
+    height: 300px;
 } 
 
 img {
@@ -41,4 +41,10 @@ img {
 
 #result {
     display: none;
+}
+
+#quote {
+    font-style: italic;
+    font-weight: 700;
+    font-size: large;
 }
