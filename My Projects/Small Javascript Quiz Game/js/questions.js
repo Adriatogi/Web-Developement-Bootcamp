@@ -11,6 +11,7 @@ function restart() {
   $("button").show();
   $("#picture img:last-child").remove();
   $('#quote').empty();
+  $("#question").text("Question 1");
   current = 0;
   total = 0;
 }
@@ -33,7 +34,7 @@ function character(total) {
     case 211:
       $("h2").text("Your character is Morty Smith");
       $('#picture').prepend('<img id="morty" src=pictures/Morty.png />')
-      $('#quote').prepend("&#8220;Nobody exists on purpose. Nobody belongs anywhere. We're all going to die.Come watch TV&#8221;- Morty Smith")
+      $('#quote').prepend("&#8220;Nobody exists on purpose. Nobody belongs anywhere. We're all going to die. Come watch TV&#8221;- Morty Smith")
       break;
     case 311:
       $("h2").text("Your character is Mr. Poopybutthole");
@@ -76,7 +77,7 @@ function character(total) {
       $('#quote').prepend('&#8220;In bird culture, this is considered a dick move&#8221;- Birdperson')
       break;
     case 212:
-      $("h2").text("Your character is Alien Parasites");
+      $("h2").text("Your character is the Alien Parasites");
       $('#picture').prepend('<img id="parasites" src=pictures/Parasites.png />') 
       $('#quote').prepend("&#8220;Like we say in Brooklyn...we're walkin' here!&#8221;— Cousin Nicky")
       break;
@@ -108,7 +109,7 @@ function character(total) {
     case 232:
       $("h2").text("Your character is Krombopulos Michael");
       $('#picture').prepend('<img id="krom" src=pictures/Krom.png />')  
-      $('#quote').prepend("&#8220;I'm very discreet.I have no code of ethics.I will kill anyone, anywhere.Children, animals, old people, doesn't matter. I just love killing&#8221;- Krombopulos Michael")
+      $('#quote').prepend("&#8220;I'm very discreet. I have no code of ethics. I will kill anyone, anywhere. Children, animals, old people, doesn't matter. I just love killing&#8221;- Krombopulos Michael")
       break;
     case 332:
       $("h2").text("Your character is Morty Smith Jr.");
@@ -123,7 +124,7 @@ function character(total) {
     case 213:
       $("h2").text("Your character is Mr. Meeseeks");
       $('#picture').prepend('<img id="meeseeks" src=pictures/meeseeks.png />')  
-      $('#quote').prepend("&#8220;I'm Mr.Meeseeks! Look at me!&#8221;- Mr. Meeseeks")
+      $('#quote').prepend("&#8220;I'm Mr. Meeseeks! Look at me!&#8221;- Mr. Meeseeks")
       break;
     case 313:
       $("h2").text("Your character is Noob-Noob");
@@ -148,7 +149,7 @@ function character(total) {
     case 133:
       $("h2").text("Your character is Evil Morty");
       $('#picture').prepend('<img id="evil" src=pictures/Evil.png />')  
-      $('#quote').prepend('&#8220;This seems like a good time for a drink, and a cold calculated speech with sinister overtones. A speech about politics, about order, brotherhood, power. But speeches are for campaigning. Now is the time for action.&#8221;- Summer Smith')
+      $('#quote').prepend('&#8220;This seems like a good time for a drink, and a cold calculated speech with sinister overtones. A speech about politics, about order, brotherhood, power. But speeches are for campaigning. Now is the time for action.&#8221;- Evil Morty')
       break;
     case 233:
       $("h2").text("Your character is Revolio Clockberg, Jr.");
@@ -170,23 +171,27 @@ function changeQuestion(){
     $("#choice1").text("Totally");
     $("#choice2").text("Kind of");
     $("#choice3").text("Nah");
+    $("#question").text("Question 1");
   }
     else if(current===1){
     $("h2").text("Are you funny?");
     $("#choice1").text("Pretty funny");
     $("#choice2").text("So so");
     $("#choice3").text("Not really");
+    $("#question").text("Question 2");
   }
   else if(current===2){
     $("h2").text("Do you value family?");
     $("#choice1").text("All the way");
     $("#choice2").text("A little");
     $("#choice3").text("No thanks");
+    $("#question").text("Question 3");
   }
   else if(current ===3){
     character(total);
     restartButtons();
     $("#result").slideDown();
+    $("#question").text("");
   }
   else if(current ===4){  
     restart();
