@@ -11,6 +11,7 @@ function restart() {
   $("button").show();
   $("#picture img:last-child").remove();
   $('#quote').empty();
+  $("#questionDisplay").show();
   $("#question").text("Question 1");
   current = 0;
   total = 0;
@@ -191,7 +192,7 @@ function changeQuestion(){
     character(total);
     restartButtons();
     $("#result").slideDown();
-    $("#question").text("");
+    $("#questionDisplay").hide();
   }
   else if(current ===4){  
     restart();
