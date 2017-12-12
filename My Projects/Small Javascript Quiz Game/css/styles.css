@@ -7,7 +7,7 @@ body {
 }
 
 #jumbo {
-    background: white;
+    background: rgb(255, 255, 255);
     margin: 3% 10%;
     position: relative;
     padding: 3rem 2rem
@@ -24,7 +24,10 @@ body {
     margin-bottom: 10px;
 }
 #background {
-    background: #99ccff;
+    background-image: url(../pictures/Ready.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 100%;
 }
 
 #restartButtonParent {
@@ -73,4 +76,18 @@ img {
 
 .smaller {
     font-size: 30px;
+}
+
+#restartButton {
+    background-color: #CCCC99;
+    color: rgb(255, 255, 255);
+}
+#choice1 {
+    color: rgb(255, 255, 255);
+}
+#choice2 {
+    color: rgb(255, 255, 255);
+}
+#choice3 {
+    color: rgb(255, 255, 255);
 }
