@@ -252,6 +252,12 @@ $("#choice3").on("click", function () {
   console.log(current);
 })
 
+$(".buttonChoice").hover(
+  function(){$(this).toggleClass('scale-up'), 
+  function(){$(this).toggleClass('scale-down')
+   }
+ })
+
 $("#restartButton").on("click", function(){
   restart();
 })

@@ -91,3 +91,10 @@ img {
 #choice3 {
     color: rgb(255, 255, 255);
 }
+
+.scale-up {
+  transform: scale(1.2);
+}
+.scale-down {
+  transform: scale(1);
+}
