@@ -1,0 +1,14 @@
+{
+  "name": "expressbasicexercise",
+  "version": "1.0.0",
+  "description": "Following a course",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrian Gamarra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
