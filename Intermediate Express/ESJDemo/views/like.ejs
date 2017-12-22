@@ -1,3 +1,9 @@
-<h1>You like: <%= thingVar %> </h1
+<h1>You like: <%= thingVar %> </h1>
+
+<% if(thingVar.toLowerCase() === "pizza"){ %>
+      <p>Great minds think alike</p>
+<% } else {%>
+      <p>I guess thats good, but pizza is better</p>
+<% } %>
 
 <p>This is the like.ejs file</p>
