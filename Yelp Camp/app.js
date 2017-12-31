@@ -49,7 +49,6 @@ app.post("/campgrounds", function(req, res){
             res.redirect("/campgrounds");
         }
     });
-    res.redirect("/campgrounds");
 });
 
 //New - show form to create a new campground
