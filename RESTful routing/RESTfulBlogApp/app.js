@@ -18,17 +18,13 @@ var blogSchema = new mongoose.Schema({
 });
 var Blog = mongoose.model("blogs", blogSchema);
 
-// Blog.create({
-//   title: "Yeet",
-//   image: "goo.gl/j5wWrZ",
-//   body: "- &#8220;Bidoof, they outnumber you 5 to 1!&#8221;</br> - &#8220;Then it is an even fight&#8221;"
-// });
-
 //Restful Routes
+
 app.get("/", function(req, res){
   res.redirect("/blogs");
 });
 
+//Index Route
 app.get("/blogs", function(req, res){
   Blog.find({}, function(err, blogs){
     if (err){
@@ -36,6 +32,23 @@ app.get("/blogs", function(req, res){
       console.log(err);
     } else {
       res.render("index", {blogs: blogs});
+    }
+  });
+});
+
+//New Route
+app.get("/blogs/new", function(req, res){
+  res.render("new");
+});
+
+//Create Route
+app.post("/blogs", function(req, res){
+  Blog.create(req.body.blog, function(err, newBlog){
+    if(err){
+      console.log("There was an error");
+      res.render("new");
+    } else {
+      res.redirect("/blogs");
     }
   });
 });
