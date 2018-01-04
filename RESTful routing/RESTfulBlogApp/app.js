@@ -1,4 +1,5 @@
-var methodOverride = require("method-override"),
+var expressSanitizer = require('express-sanitizer'),
+methodOverride = require("method-override"),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 express = require('express'),
@@ -9,6 +10,7 @@ mongoose.connect('mongodb://localhost/restful_blog_app');
 app.set('view engine', 'ejs');
 app.use(express.static("public")); // this will let us use static files like css and js files in our express app
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 // Mongoose/model config
@@ -45,6 +47,7 @@ app.get("/blogs/new", function(req, res){
 
 //Create Route
 app.post("/blogs", function(req, res){
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.create(req.body.blog, function(err, newBlog){
     if(err){
       console.log("There was an error");
@@ -79,6 +82,7 @@ app.get("/blogs/:id/edit", function(req, res){
 
 //Update Route
 app.put("/blogs/:id", function(req,res){
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog ,function(err, updatedBlog){
    if(err){
       res.redirect("/blogs");

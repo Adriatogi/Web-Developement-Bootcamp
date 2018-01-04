@@ -5,3 +5,15 @@ i.icon {
 .container.main {
   margin-top: 7em;
 }
+
+#delete {
+  display: inline;
+}
+
+i.chevron {
+  font-size: 1em;
+}
+
+#buttons {
+  padding-top: 8px;
+}
