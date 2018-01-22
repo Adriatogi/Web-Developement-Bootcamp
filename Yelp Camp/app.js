@@ -67,6 +67,7 @@ app.get("/campgrounds/:id", function(req, res){
             console.log("An error has occured while looking for campgrounds in show route");
             console.log(err);
             res.redirect("/campgrounds");
+            console.log("Webpage has been redirected");
         } else {
             res.render("campgrounds/show", {campground: foundCampground});
         }
@@ -101,7 +102,7 @@ app.post("/campgrounds/:id/comments", function(req, res){
                     console.log(err);
                     res.redirect("/campgrounds");
                 } else {
-                    foundCampground.comments.push(comment._id)
+                    foundCampground.comments.push(comment._id);
                     foundCampground.save();
                     res.redirect("/campgrounds/" + foundCampground._id); 
                 }

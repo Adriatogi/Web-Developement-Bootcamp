@@ -45,7 +45,7 @@ function seedDB(){
               console.log("An error has occured when creating comment");
               console.log(err);
             } else {
-              campgrounds.comments.push(comment);
+              campgrounds.comments.push(comment._id);
               campgrounds.save();
               console.log("Created comment");
             }
