@@ -10,4 +10,4 @@ var campgroundSchema = new mongoose.Schema({
     }]
 });
 
-module.exports  = mongoose.model("campgrounds", campgroundSchema); //arguement has to be plural for mongoose
+module.exports = mongoose.model("campgrounds", campgroundSchema); //arguement has to be plural for mongoose

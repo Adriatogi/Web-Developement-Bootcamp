@@ -1,19 +1,34 @@
-var bodyParser = require("body-parser"), // if it is consecutive variable decleration, you dont have to say var in the beggining and seperate each variable with a comma
+var passportLocalMongoose = require("passport-local-mongoose"),
+    LocalStrategy = require("passport-local"),
+    bodyParser = require("body-parser"), 
     mongoose = require('mongoose'),
+    passport = require("passport"),
     express = require('express'),
     seedDB = require('./seeds'),
     app = express();
-
-mongoose.connect("mongodb://localhost/yelp_camp");
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + "/public"));
-app.set("view engine", "ejs");
-// seedDB();
 
 //Schema Setup
 var Campground = require('./models/campground'),
     Comment = require('./models/comment'),
     User = require('./models/user');
+
+mongoose.connect("mongodb://localhost/yelp_camp");
+app.set("view engine", "ejs");
+// seedDB();
+
+app.use(require("express-session")({
+  secret: "Adriatogi wants to get a job",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //==================
 //ROUTES
@@ -112,7 +127,29 @@ app.post("/campgrounds/:id/comments", function(req, res){
     });
 });
 
+//===============
+//Auth Routes
+//===============
 
+// show register form
+app.get("/register", function(req, res){
+   res.render("register");
+});
+
+//sign up logic
+app.post("/register", function(req, res){
+  var newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user){
+    if(err || !user){
+      console.log(err);
+      console.log("There was an error signing up");
+      return res.render("register");
+    }
+    passport.authenticate("local")(req, res, function(){
+      res.redirect("/campgrounds");
+    });
+  });
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server is listening");
