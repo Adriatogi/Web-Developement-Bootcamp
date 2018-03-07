@@ -30,6 +30,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
+
 //==================
 //ROUTES
 //==================
@@ -48,7 +53,7 @@ app.get("/campgrounds", function(req, res){
             console.log("An error has occured while searching for all campgrounds");
             console.log(err);
         } else {
-            res.render("campgrounds/index", {campgrounds: allCampgrounds});
+            res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user});
         }
     });
 });
@@ -93,7 +98,7 @@ app.get("/campgrounds/:id", function(req, res){
 //===============
 //Comment Routes
 //===============
-app.get("/campgrounds/:id/comments/new", function(req, res){
+app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
     if(err|| !foundCampground){
             console.log("An error has occured");
@@ -105,7 +110,7 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
     });
 });
 
-app.post("/campgrounds/:id/comments", function(req, res){
+app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
         if(err|| !foundCampground){
             console.log("An error has occuredwhen looking for campground");
@@ -150,6 +155,30 @@ app.post("/register", function(req, res){
     });
   });
 });
+
+// show login form
+app.get("/login", function(req, res){
+   res.render("login");
+});
+
+// login logic
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+}), function(req, res){});
+
+// logout route
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/campgrounds");
+});
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server is listening");
