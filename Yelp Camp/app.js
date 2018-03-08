@@ -8,9 +8,7 @@ var passportLocalMongoose = require("passport-local-mongoose"),
     app = express();
 
 //Schema Setup
-var Campground = require('./models/campground'),
-    Comment = require('./models/comment'),
-    User = require('./models/user');
+var User = require('./models/user');
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
@@ -38,147 +36,15 @@ app.use(function(req, res, next){
 //==================
 //ROUTES
 //==================
-app.get("/", function(req, res){
-    res.render("landing");
-});
+var campgroundRoutes = require("./routes/campgrounds"),
+    commentRoutes = require("./routes/comments"),
+    indexRoutes = require("./routes/index");
+   
+   
+app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/", indexRoutes);
 
-//==================
-//Campground Routes
-//==================
-// Index - show all campgrounds
-app.get("/campgrounds", function(req, res){
-    //Get campgrounds from database
-    Campground.find({}, function(err, allCampgrounds){
-        if(err){
-            console.log("An error has occured while searching for all campgrounds");
-            console.log(err);
-        } else {
-            res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user});
-        }
-    });
-});
-
-//Create - add new campground to database
-app.post("/campgrounds", function(req, res){
-    var name = req.body.name,
-    image = req.body.image,
-    desc = req.body.description,
-    newCampground = {name: name, image: image, description: desc};
-    
-    //create a new campground and save to DB
-    Campground.create(newCampground, function(err, newCampground){
-         if(err){
-            console.log("An error has occured while creating a new campground");
-            console.log(err);
-        } else {
-            res.redirect("/campgrounds");
-        }
-    });
-});
-
-//New - show form to create a new campground
-app.get("/campgrounds/new", function(req,res){
-    res.render("campgrounds/new");
-});
-
-//Show - show more information of one campground
-app.get("/campgrounds/:id", function(req, res){
-    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-        if(err|| !foundCampground){
-            console.log("An error has occured while looking for campgrounds in show route");
-            console.log(err);
-            res.redirect("/campgrounds");
-            console.log("Webpage has been redirected");
-        } else {
-            res.render("campgrounds/show", {campground: foundCampground});
-        }
-    });
-});
-
-//===============
-//Comment Routes
-//===============
-app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
-    Campground.findById(req.params.id, function(err, foundCampground){
-    if(err|| !foundCampground){
-            console.log("An error has occured");
-            console.log(err);
-            res.redirect("/campgrounds");
-        } else {
-            res.render("comments/new", {campground: foundCampground});
-        }   
-    });
-});
-
-app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
-    Campground.findById(req.params.id, function(err, foundCampground){
-        if(err|| !foundCampground){
-            console.log("An error has occuredwhen looking for campground");
-            console.log(err);
-            res.redirect("/campgrounds");
-        } else {
-            Comment.create(req.body.comment, function(err, comment){
-                if(err|| !comment){
-                    console.log("An error has occured when creating comment");
-                    console.log(err);
-                    res.redirect("/campgrounds");
-                } else {
-                    foundCampground.comments.push(comment._id);
-                    foundCampground.save();
-                    res.redirect("/campgrounds/" + foundCampground._id); 
-                }
-            });
-        }   
-    });
-});
-
-//===============
-//Auth Routes
-//===============
-
-// show register form
-app.get("/register", function(req, res){
-   res.render("register");
-});
-
-//sign up logic
-app.post("/register", function(req, res){
-  var newUser = new User({username: req.body.username});
-  User.register(newUser, req.body.password, function(err, user){
-    if(err || !user){
-      console.log(err);
-      console.log("There was an error signing up");
-      return res.render("register");
-    }
-    passport.authenticate("local")(req, res, function(){
-      res.redirect("/campgrounds");
-    });
-  });
-});
-
-// show login form
-app.get("/login", function(req, res){
-   res.render("login");
-});
-
-// login logic
-app.post("/login", passport.authenticate("local", {
-    successRedirect: "/campgrounds",
-    failureRedirect: "/login"
-}), function(req, res){});
-
-// logout route
-app.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/campgrounds");
-});
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server is listening");
