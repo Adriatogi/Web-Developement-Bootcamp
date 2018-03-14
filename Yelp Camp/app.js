@@ -1,4 +1,5 @@
 var passportLocalMongoose = require("passport-local-mongoose"),
+    methodOverride = require("method-override"),
     LocalStrategy = require("passport-local"),
     bodyParser = require("body-parser"), 
     mongoose = require('mongoose'),
@@ -21,6 +22,7 @@ app.use(require("express-session")({
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
 
