@@ -6,7 +6,7 @@ var express = require("express"),
 //Comment Routes
 //==============
 
-// Create a new comment
+// Create a form for a new comment
 router.get("/new", isLoggedIn, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
     if(err|| !foundCampground){
@@ -45,6 +45,33 @@ router.post("/", isLoggedIn, function(req, res){
             });
         }   
     });
+});
+
+//Edit- edit existing campground form
+router.get("/:comment_id/edit", function(req, res) {
+    Comment.findById(req.params.comment_id, function(err, foundComment) {
+        if(err || !foundComment){
+            res.redirect("back");
+            console.log(err);
+            console.log("There was an error searching the comment to edit");
+        }
+        res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});    
+        
+    });
+});
+
+
+//Update - update exisitng comment  logic
+router.put("/:comment_id", function(req, res){
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment ,function(err, updatedComment){
+    if(err){
+      res.redirect("back");
+      console.log(err);
+      console.log('There was an error updating the comment');
+    } else {
+      res.redirect("/campgrounds/"+req.params.id);
+    } 
+  });
 });
 
 // middleware

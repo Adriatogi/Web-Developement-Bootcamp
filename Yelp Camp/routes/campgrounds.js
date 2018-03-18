@@ -107,23 +107,23 @@ function isLoggedIn(req, res, next){
 }
 
 function checkCampgroundOwnership (req, res, next){
-    if(req.isAuthenticated()){ // Check if user is logged in
-        Campground.findById(req.params.id, function(err, foundCampground) { 
-            if(err || !foundCampground){
-                res.redirect("back") ;
-                console.log(err);
-                console.log("There was a problem finding the campground to edit");
-            } else { 
-                if(foundCampground.author.id.equals(req.user._id)) {
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            } 
-        });
-    } else {
-        res.redirect("back");
-    }
+  if(req.isAuthenticated()){ // Check if user is logged in
+    Campground.findById(req.params.id, function(err, foundCampground) { 
+      if(err || !foundCampground){
+        res.redirect("back") ;
+        console.log(err);
+        console.log("There was a problem finding the campground to edit");
+      } else { 
+        if(foundCampground.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      } 
+    });
+  } else {
+    res.redirect("back");
+  }
 }
 
 module.exports = router;
