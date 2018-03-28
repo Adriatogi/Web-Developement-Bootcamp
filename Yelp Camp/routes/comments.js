@@ -1,9 +1,10 @@
-var express = require("express"),
-	router = express.Router({mergeParams: true}),
-	Campground = require("../models/campground"),
-	Comment = require ("../models/comment"),
-	middleware = require("../middleware");
+var Campground = require("../models/campground"),
+		Comment = require ("../models/comment"),
+		middleware = require("../middleware"),
+		express = require("express");
 
+var router = express.Router({mergeParams: true});
+	
 //Comment Routes
 //==============
 
@@ -11,7 +12,7 @@ var express = require("express"),
 router.get("/new", middleware.isLoggedIn, function(req, res){
 	Campground.findById(req.params.id, function(err, foundCampground){
 	if(err|| !foundCampground){
-			console.log("An error has occured");
+			req.flash("error", "There was an error while finding the campground that includes the comment. Please try again later!");
 			console.log(err);
 			res.redirect("/campgrounds");
 		} else {
@@ -24,13 +25,13 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 router.post("/", middleware.isLoggedIn, function(req, res){
 	Campground.findById(req.params.id, function(err, foundCampground){
 		if(err|| !foundCampground){
-			console.log("An error has occuredwhen looking for campground");
+			req.flash("error", "An error has occure when looking for the campground to add the comment. Please try again later!");
 			console.log(err);
 			res.redirect("/campgrounds");
 		} else {
 			Comment.create(req.body.comment, function(err, comment){
 				if(err|| !comment){
-					console.log("An error has occured when creating comment");
+					req.flash("error", "An error occured while creating the new comment!");
 					console.log(err);
 					res.redirect("/campgrounds");
 				} else {
@@ -41,10 +42,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 					comment.save();
 					foundCampground.comments.push(comment._id);
 					foundCampground.save();
+					req.flash("success", "Successfully added comment");
 					res.redirect("/campgrounds/" + foundCampground._id); 
 				}
 			});
-		}   
+		}
 	});
 });
 
@@ -52,9 +54,9 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
 	Comment.findById(req.params.comment_id, function(err, foundComment) {
 		if(err || !foundComment){
+			req.flash("error", "There was an error searching the comment to edit");
 			res.redirect("back");
 			console.log(err);
-			console.log("There was an error searching the comment to edit");
 		}
 		res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});    
 		
@@ -66,9 +68,9 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 	Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment ,function(err, updatedComment){
 	if(err){
+		req.flash("error", "There was an error updating the comment");
 		res.redirect("back");
 		console.log(err);
-		console.log('There was an error updating the comment');
 	} else {
 		res.redirect("/campgrounds/"+req.params.id);
 	} 
@@ -80,9 +82,10 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
     Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             console.log(err);
-            console.log("There was a problem finding the comment to delete");
+            req.flash("error", "There was a problem finding the comment to delete");
             res.redirect("back");
         } else {
+        	req.flash("success", "Comment removed!");
             res.redirect("/campgrounds/"+req.params.id);
         }
     });
