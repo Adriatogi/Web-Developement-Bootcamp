@@ -10,9 +10,10 @@ var passportLocalMongoose = require("passport-local-mongoose"),
     app = express();
 
 //Schema Setup
-var User = require('./models/user');
+var User = require('./models/user'),
+    url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url);
 
-mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
 // seedDB();
 
@@ -55,4 +56,4 @@ app.use("/", indexRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server is listening");
-})
+});
